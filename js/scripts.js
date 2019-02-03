@@ -1,7 +1,31 @@
 // Back end ___________________________
-// function Order(){
-//
-// }
+function Order(){
+  this.pizzas = [],
+  this.currentId = 0
+}
+
+Order.prototype.addPizza = function(pizza){
+  pizza.id = this.assignId();
+  this.pizzas.push(pizza);
+}
+
+Order.prototype.assignId = function(){
+  this.currentId += 1;
+  return this.currentId;
+}
+
+Order.prototype.deletePizza = function(id){
+  for(var i=0; i<this.pizzas.length; i++){
+    if(this.pizzas[i]){
+      if (this.pizzas[i].id == id){
+        delete this.pizzas[i];
+        return true;
+      }
+    }
+  };
+  return false;
+}
+
 function Pizza(){
   this.sizing = "",
   this.toppings = []
@@ -20,7 +44,7 @@ Pizza.prototype.totalCost = function(){
   this.toppings.forEach(function(topping){
     toppingsTotal += topping.price;
   });
-  return toppingsTotal + this.price;
+  return toppingsTotal + this.sizing.price;
 }
 
 function Size(name, price){
@@ -33,16 +57,14 @@ function Topping(name, price){
   this.price = price
 }
 
-
-
-
 // Front end __________________________
 function displayTotal(){
-  var insertIn = $("span#total");
-  var insertWhat = pizza.totalCost();
-  insertIn.text(insertWhat);
+  var insertWhere = $("span#total");
+  var insertWhat = pizza.totalCost().toFixed(2);
+  insertWhere.text(insertWhat);
 }
 
+var order = new Order();
 var pizza = new Pizza();
 var small = new Size ("small", 6.5);
 var medium = new Size ("medium", 9.5);
@@ -66,6 +88,9 @@ console.log(pizza);
       var topping = $(this).val();
       pizza.addTopping(eval(topping));
     });
+    document.getElementById("formOne").reset();
+    order.addPizza(pizza);
+console.log(order.pizzas);
     displayTotal();
   });
 });

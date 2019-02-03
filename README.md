@@ -11,7 +11,7 @@ _This is a website for a pizza company where a user can choose one or more indiv
 ### Specs
 | Behavior - Plain English | Input | Output |
 | :-------------     | :------------- | :------------- |
-| **Program ** | User input:  | Output: |
+| **Program counts total price for toppings and size** | User input: "cheese","small" | Output: 9.49|
 
 
 ## Setup instructions
