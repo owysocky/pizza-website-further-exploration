@@ -13,7 +13,7 @@ Pizza.prototype.addSize = function(size){
 }
 
 Pizza.prototype.totalCost = function(){
-  toppingsTotal = 0;
+  var toppingsTotal = 0;
   this.toppings.forEach(function(topping){
     toppingsTotal += topping.price;
   });
@@ -38,6 +38,7 @@ var size = new Size("small", 2)
 var pizza1 = new Pizza ();
 pizza1.addTopping(toppingBacon);
 pizza1.addTopping(toppingCheese);
+pizza1.addSize(size);
 
 
 
