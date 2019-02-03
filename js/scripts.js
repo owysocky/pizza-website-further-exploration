@@ -1,6 +1,9 @@
 // Back end ___________________________
-function Pizza(size, toppings){
-  this.sizing = [],
+// function Order(){
+//
+// }
+function Pizza(){
+  this.sizing = "",
   this.toppings = []
 }
 
@@ -9,7 +12,7 @@ Pizza.prototype.addTopping = function(topping){
 }
 
 Pizza.prototype.addSize = function(size){
-  this.sizing.push(size);
+  return this.sizing = size;
 }
 
 Pizza.prototype.totalCost = function(){
@@ -17,7 +20,7 @@ Pizza.prototype.totalCost = function(){
   this.toppings.forEach(function(topping){
     toppingsTotal += topping.price;
   });
-  return toppingsTotal + size.price;
+  return toppingsTotal + this.price;
 }
 
 function Size(name, price){
@@ -34,10 +37,16 @@ function Topping(name, price){
 
 
 // Front end __________________________
+function displayTotal(){
+  var insertIn = $("span#total");
+  var insertWhat = pizza.totalCost();
+  insertIn.text(insertWhat);
+}
+
 var pizza = new Pizza();
 var small = new Size ("small", 6.5);
-var medium = new Size ("small", 9.5);
-var large = new Size ("small", 14);
+var medium = new Size ("medium", 9.5);
+var large = new Size ("large", 14);
 var cheese = new Topping("cheese", 2.99);
 var dCheese = new Topping("doubleCheese", 3.99);
 var pepperoni = new Topping("pepperoni", 2.99);
@@ -50,12 +59,13 @@ $(document).ready(function() {
   $("#formOne").submit(function(event){
     event.preventDefault();
     var sizeInput = $("input:radio[name=size]:checked").val();
-    pizza.addSize(sizeInput);
+    pizza.addSize(eval(sizeInput));
 console.log(pizza);
 
   $("input:checkbox[name=topping]:checked").each(function(){
       var topping = $(this).val();
-      pizza.addTopping(topping);
+      pizza.addTopping(eval(topping));
     });
+    displayTotal();
   });
 });
