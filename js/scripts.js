@@ -32,22 +32,30 @@ function Topping(name, price){
 
 
 
-var toppingCheese = new Topping ('cheese', 2);
-var toppingBacon = new Topping ('bacon', 3);
-var size = new Size("small", 2)
-var pizza1 = new Pizza ();
-pizza1.addTopping(toppingBacon);
-pizza1.addTopping(toppingCheese);
-pizza1.addSize(size);
-
-
 
 // Front end __________________________
-
+var pizza = new Pizza();
+var small = new Size ("small", 6.5);
+var medium = new Size ("small", 9.5);
+var large = new Size ("small", 14);
+var cheese = new Topping("cheese", 2.99);
+var dCheese = new Topping("doubleCheese", 3.99);
+var pepperoni = new Topping("pepperoni", 2.99);
+var artichoke = new Topping("artichoke", 1.99);
+var anchovy = new Topping("anchovy", 2.99);
+var bacon = new Topping("bacon", 2.99);
+var pineapple = new Topping("pineapple", 1.99);
 
 $(document).ready(function() {
   $("#formOne").submit(function(event){
     event.preventDefault();
+    var sizeInput = $("input:radio[name=size]:checked").val();
+    pizza.addSize(sizeInput);
+console.log(pizza);
 
+  $("input:checkbox[name=topping]:checked").each(function(){
+      var topping = $(this).val();
+      pizza.addTopping(topping);
+    });
   });
 });
