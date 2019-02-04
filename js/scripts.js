@@ -1,31 +1,4 @@
 // Back end ___________________________
-function Order(){
-  this.pizzas = [],
-  this.currentId = 0
-}
-
-Order.prototype.addPizza = function(pizza){
-  pizza.id = this.assignId();
-  this.pizzas.push(pizza);
-}
-
-Order.prototype.assignId = function(){
-  this.currentId += 1;
-  return this.currentId;
-}
-
-Order.prototype.deletePizza = function(id){
-  for(var i=0; i<this.pizzas.length; i++){
-    if(this.pizzas[i]){
-      if (this.pizzas[i].id == id){
-        delete this.pizzas[i];
-        return true;
-      }
-    }
-  };
-  return false;
-}
-
 function Pizza(){
   this.sizing = "",
   this.toppings = []
@@ -64,7 +37,7 @@ function displayTotal(){
   insertWhere.text(insertWhat);
 }
 
-var order = new Order();
+
 var pizza = new Pizza();
 var small = new Size ("small", 6.5);
 var medium = new Size ("medium", 9.5);
@@ -82,15 +55,15 @@ $(document).ready(function() {
     event.preventDefault();
     var sizeInput = $("input:radio[name=size]:checked").val();
     pizza.addSize(eval(sizeInput));
-console.log(pizza);
 
   $("input:checkbox[name=topping]:checked").each(function(){
       var topping = $(this).val();
       pizza.addTopping(eval(topping));
     });
     document.getElementById("formOne").reset();
-    order.addPizza(pizza);
-console.log(order.pizzas);
+    $("#formOne").trigger('reset');
+
+console.log(pizza); //--------------------------!!!
     displayTotal();
   });
 });
