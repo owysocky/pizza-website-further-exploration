@@ -14,7 +14,8 @@
         <h1>PizzaShack</h1>
         <h2>Welcome, you can order your pizza here!</h2>
       </div>
-      <div class="well">
+      <div class="well row">
+        <div class="col-sm-6">
           <form id="formOne">
             <div class="radio">
               <p><strong>Choose your size:</strong></p>
@@ -48,6 +49,14 @@
             <button type="submit" class="btn btn-success btn-lg">Order!</button>
           </form>
         </div>
+        <div class="col-sm-6">
+          <h2>Your order basket:</h2>
+            <ul id="pizza">
+            </ul>
+            <div id="buttons">
+            </div>
+        </div>
+      </div>
       <div class="well">
         <h2>Your oder total is <strong>$<span id="total"></span></strong></h2>
       </div>

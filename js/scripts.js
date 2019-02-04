@@ -1,4 +1,31 @@
 // Back end ___________________________
+function Order(){
+  this.pizzas = [],
+  this.currentId = 0
+}
+
+Order.prototype.addPizza = function(pizza){
+  pizza.id = this.assignId();
+  this.pizzas.push(pizza);
+}
+
+Order.prototype.assignId = function(){
+  this.currentId += 1;
+  return this.currentId;
+}
+
+Order.prototype.deletePizza = function(id){
+  for(var i=0; i<this.pizzas.length; i++){
+    if(this.pizzas[i]){
+      if (this.pizzas[i].id == id){
+        delete this.pizzas[i];
+        return true;
+      }
+    }
+  };
+  return false;
+}
+
 function Pizza(){
   this.sizing = "",
   this.toppings = []
@@ -37,7 +64,16 @@ function displayTotal(){
   insertWhere.text(insertWhat);
 }
 
+// function displayOrder(){
+//   var insertWhere = $("p#pizza");
+//   var insertWhat = "";
+//   pizza.toppings.forEach(function(topping) {
+//     insertWhat = "Your toppings are: " + topping.name;
+//   });
+//   insertWhere.text(insertWhat);
+// }
 
+var order = new Order();
 var pizza = new Pizza();
 var small = new Size ("small", 6.5);
 var medium = new Size ("medium", 9.5);
@@ -62,8 +98,9 @@ $(document).ready(function() {
     });
     document.getElementById("formOne").reset();
     $("#formOne").trigger('reset');
-
+    order.addPizza(pizza);
 console.log(pizza); //--------------------------!!!
     displayTotal();
+    // displayOrder();
   });
 });
