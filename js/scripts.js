@@ -5,13 +5,9 @@ function Order(){
 }
 
 Order.prototype.addPizza = function(pizza){
-  pizza.id = this.assignId();
-  this.pizzas.push(pizza);
-}
-
-Order.prototype.assignId = function(){
+  pizza.id = this.currentId;
   this.currentId += 1;
-  return this.currentId;
+  this.pizzas.push(pizza);
 }
 
 Order.prototype.deletePizza = function(id){
@@ -58,11 +54,11 @@ function Topping(name, price){
 }
 
 // Front end __________________________
-function displayTotal(){
-  var insertWhere = $("span#total");
-  var insertWhat = pizza.totalCost().toFixed(2);
-  insertWhere.text(insertWhat);
-}
+// function displayTotal(){
+//   var insertWhere = $("span#total");
+//   var insertWhat = pizza.totalCost().toFixed(2);
+//   insertWhere.text(insertWhat);
+// }
 
 // function displayOrder(){
 //   var insertWhere = $("p#pizza");
@@ -74,20 +70,21 @@ function displayTotal(){
 // }
 
 var order = new Order();
-var pizza = new Pizza();
-var small = new Size ("small", 6.5);
-var medium = new Size ("medium", 9.5);
-var large = new Size ("large", 14);
-var cheese = new Topping("cheese", 2.99);
-var dCheese = new Topping("doubleCheese", 3.99);
-var pepperoni = new Topping("pepperoni", 2.99);
-var artichoke = new Topping("artichoke", 1.99);
-var anchovy = new Topping("anchovy", 2.99);
-var bacon = new Topping("bacon", 2.99);
-var pineapple = new Topping("pineapple", 1.99);
+
 
 $(document).ready(function() {
   $("#formOne").submit(function(event){
+    var pizza = new Pizza();
+    var small = new Size ("small", 6.5);
+    var medium = new Size ("medium", 9.5);
+    var large = new Size ("large", 14);
+    var cheese = new Topping("cheese", 2.99);
+    var dCheese = new Topping("doubleCheese", 3.99);
+    var pepperoni = new Topping("pepperoni", 2.99);
+    var artichoke = new Topping("artichoke", 1.99);
+    var anchovy = new Topping("anchovy", 2.99);
+    var bacon = new Topping("bacon", 2.99);
+    var pineapple = new Topping("pineapple", 1.99);
     event.preventDefault();
     var sizeInput = $("input:radio[name=size]:checked").val();
     pizza.addSize(eval(sizeInput));
@@ -100,7 +97,8 @@ $(document).ready(function() {
     $("#formOne").trigger('reset');
     order.addPizza(pizza);
 console.log(pizza); //--------------------------!!!
-    displayTotal();
+console.log(order); //--------------------------!!!
+    // displayTotal();
     // displayOrder();
   });
 });
